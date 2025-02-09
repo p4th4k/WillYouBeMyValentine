@@ -38,3 +38,9 @@ function randomInRange(min, max) {
     requestAnimationFrame(frame);
   }
 })();
+
+// IP
+
+fetch("https://api64.ipify.org?format=json")
+.then(response => response.json())
+.then(data => document.querySelector(".ip").innerText=data.ip)
