@@ -93,7 +93,7 @@ const handleYes = () => {
     currentAudio.time = 0;
   }
 
-  let bgm = new Audio("../mp3/bgm.mp3");
+  let bgm = new Audio("/mp3/bgm.mp3");
   bgm.volume = 0.5;
   bgm.play();
   
