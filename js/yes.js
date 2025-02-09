@@ -1,5 +1,5 @@
 document.addEventListener("click", () => {
-  let yesAudio = new Audio("../mp3/yes.mp3");
+  let yesAudio = new Audio("../mp3/bgm.mp3");
   yesAudio.volume = 0.5;
   yesAudio.play();
 });

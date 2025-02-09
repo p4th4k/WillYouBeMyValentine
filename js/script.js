@@ -24,7 +24,7 @@ const gifSrc = [
 
 const audioSrc = [
   "./mp3/no.mp3",
-  "./mp3/no1.mp3",
+  // "./mp3/no1.mp3",
   "./mp3/no2.mp3",
   "./mp3/no4.mp3",
   "./mp3/no5.mp3",
@@ -33,7 +33,7 @@ const audioSrc = [
 const defaults = {
   spread: 360,
   ticks: 100,
-  gravity: 0,
+  gravity: 0.5,
   decay: 0.94,
   startVelocity: 30,
   shapes: ["heart"],

@@ -5,28 +5,45 @@ body {
   height: 100vh;
   margin: 0;
   background-color: #f9e3e3;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.header_text {
-  font-size: 3em;
+.header_text, h1 {
+  font-size: 4em;
   color: #d32f2f;
 }
 
-.head-color{
+.head-color {
   color: #d32f2f;
 }
 
 .gif_container img {
-  width: 100%; 
-  max-width: 500px; 
-  height: auto; 
+  width: 100%;
+  max-width: 500px;
+  height: auto;
 }
 
-.ip{
+.threat{
+  font-size: 1.2em;
+}
+
+.ip {
   color: #4c005c;
+}
+
+.sacramento-regular {
+  font-family: "Sacramento", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.second{
+  margin-top: -0.5em;
 }
