@@ -63,5 +63,5 @@ const handleNo = () => {
 };
 
 const handleYes = () => {
-  window.location.href = "./yes_page.html";
+  window.location.href = "./yes_page/yes_page.html";
 };
