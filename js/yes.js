@@ -1,15 +1,3 @@
-document.addEventListener("click", () => {
-  let yesAudio = new Audio("../mp3/bgm.mp3");
-  yesAudio.volume = 0.5;
-  yesAudio.play();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  let yesAudio = new Audio("../mp3/bgm.mp3");
-  yesAudio.volume = 0.5;
-  yesAudio.play();
-});
-
 const duration = 3600 * 1000,
   animationEnd = Date.now() + duration;
 

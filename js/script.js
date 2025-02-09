@@ -24,21 +24,10 @@ const gifSrc = [
 
 const audioSrc = [
   "./mp3/no.mp3",
-  // "./mp3/no1.mp3",
   "./mp3/no2.mp3",
   "./mp3/no4.mp3",
   "./mp3/no5.mp3",
 ];
-
-const defaults = {
-  spread: 360,
-  ticks: 100,
-  gravity: 0.5,
-  decay: 0.94,
-  startVelocity: 30,
-  shapes: ["heart"],
-  colors: ["FFC0CB", "FF69B4", "FF1493", "C71585"],
-};
 
 const btnNo = document.querySelector(".no-button");
 const btnYes = document.querySelector(".yes-button");
@@ -49,6 +38,8 @@ let gifIndex = 1;
 
 let audioIndex = 0;
 let currentAudio = null;
+
+let durationPB = 26000;
 
 const handleNo = () => {
   btnNo.textContent = prompts[promptIndex];
@@ -72,23 +63,76 @@ const handleNo = () => {
   currentAudio.onended = () => (currentAudio = null);
 };
 
+const progressBar = () => {
+  let elem = document.querySelector(".progress_bar");
+  elem.classList.remove("hide")
+  let startTime = performance.now();
+  let endTime = startTime + durationPB;
+
+  function updateProgress() {
+    let currentTime = performance.now();
+    let elapsed = currentTime - startTime;
+    let progress = (elapsed / durationPB) * 100; // Calculate progress
+
+    if (progress >= 100) {
+      progress = 100; // Ensure it does not exceed 100%
+    } else {
+      requestAnimationFrame(updateProgress); // Keep updating smoothly
+    }
+
+    elem.style.width = progress + "%";
+    elem.innerHTML = Math.round(progress) + "%";
+  }
+
+  requestAnimationFrame(updateProgress); // Start the animation
+};
+
 const handleYes = () => {
-  confetti({
-    ...defaults,
-    particleCount: 50,
-    scalar: 2,
-  });
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.time = 0;
+  }
 
-  confetti({
-    ...defaults,
-    particleCount: 50,
-    scalar: 3,
-  });
+  let bgm = new Audio("../mp3/bgm.mp3");
+  bgm.volume = 0.5;
+  bgm.play();
+  
+  progressBar();
 
-  confetti({
-    ...defaults,
-    particleCount: 50,
-    scalar: 4,
-  });
-  setTimeout(() => window.location.href = "./yes_page/yes_page.html", 5000);
+  const duration = 3600 * 1000,
+    animationEnd = Date.now() + duration;
+
+  let skew = 1;
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  (function frame() {
+    const timeLeft = animationEnd - Date.now(),
+      ticks = Math.max(200, 500 * (timeLeft / duration));
+
+    skew = Math.max(0.8, skew - 0.001);
+
+    confetti({
+      particleCount: 1,
+      startVelocity: 0,
+      ticks: ticks,
+      origin: {
+        x: Math.random(),
+        y: Math.random() * skew - 0.2,
+      },
+      colors: ["FFC0CB", "FF69B4", "FF1493", "C71585"],
+      shapes: ["heart"],
+      gravity: randomInRange(0.4, 0.6),
+      scalar: randomInRange(1, 5),
+      drift: randomInRange(-0.4, 0.4),
+    });
+
+    if (timeLeft > 0) {
+      requestAnimationFrame(frame);
+    }
+  })();
+
+  setTimeout(() => (window.location.href = "./yes_page/yes_page.html"), durationPB);
 };
